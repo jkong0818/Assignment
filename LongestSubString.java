@@ -1,20 +1,34 @@
+import java.util.HashSet;
+import java.util.Set;
+
 public class LongestSubString {
+
     public static String LongestSubString (String s) {
         String result = " ";
+        
         for(int i=0; i < s.length(); i++) {
-            String str = " ";
-            for(int j = i; j < s.length(); j++) {
-                if (str.contains("" + s.charAt(j))) {
-                    break;
-                }
-                str += s.charAt(j);
-            }
-            if(str.length() > result.length()) {
-                result = str;
+            
+        Set<Character> str = new HashSet<>();
+        
+        int j = i;
+        
+        for(; j<s.length(); j++){
+            
+            char currChar = s.charAt(j);
+            
+            if(str.contains(currChar)) {
+                break;
+            }else {
+                str.add(currChar);
             }
         }
-        return result;
+        if(result.length() < j-i+1) {
+            result = s.substring(i, j);
+        }
+        }
+        return result;    
     }
+   }
 
     public static void main(String[] args) {
         String s = LongestSubString("abcabcbb");
